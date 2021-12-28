@@ -1,12 +1,12 @@
 import { ApolloServer } from 'apollo-server-micro'
 import { schema } from '../../graphql/nexus-schema'
-import { context, createContext } from '../../graphql/context'
+import { context } from '../../graphql/context'
 import type { NextApiRequest, NextApiResponse } from 'next'
 const cors = require('micro-cors')()
 
 const apolloServer = new ApolloServer({
   schema,
-  context: context
+  context
 })
 
 const startServer = apolloServer.start()

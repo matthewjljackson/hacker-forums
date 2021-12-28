@@ -1,4 +1,5 @@
 import { objectType } from 'nexus'
+import { User } from './user'
 
 export const Link = objectType({
   name: 'Link',
@@ -6,5 +7,14 @@ export const Link = objectType({
     t.nonNull.int('id')
     t.nonNull.string('description')
     t.nonNull.string('url')
+    t.int('postedById')
+    t.field('postedBy', {
+      type: User,
+      resolve(parent, _args, ctx) {
+        return ctx.prisma.link.findUnique({ 
+          where: { id: parent.id }
+        }).postedBy()
+      }
+    })
   }
 })
