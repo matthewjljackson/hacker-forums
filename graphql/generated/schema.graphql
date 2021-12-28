@@ -14,9 +14,17 @@ type Link {
 }
 
 type Mutation {
-  createLink(data: CreateLinkInput): Link
+  createLink(data: CreateLinkInput!): Link
+  updateLink(data: UpdateLinkInput!): Link
 }
 
 type Query {
   feed: [Link]
+  link(id: Int!): Link
+}
+
+input UpdateLinkInput {
+  description: String
+  id: Int!
+  url: String
 }

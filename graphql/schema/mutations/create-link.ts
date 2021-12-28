@@ -1,4 +1,4 @@
-import { inputObjectType, mutationField } from 'nexus'
+import { inputObjectType, mutationField, nonNull } from 'nexus'
 import { Link } from '../object-types'
 
 const CreateLinkInput = inputObjectType({
@@ -11,7 +11,7 @@ const CreateLinkInput = inputObjectType({
 
 export const createLink = mutationField('createLink', {
   type: Link,
-  args: {data: CreateLinkInput },
+  args: {data: nonNull(CreateLinkInput) },
   resolve(_parent, { data }, ctx) {
     return ctx.prisma.link.create({
       data: {

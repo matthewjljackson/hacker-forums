@@ -18,6 +18,11 @@ export interface NexusGenInputs {
     description: string; // String!
     url: string; // String!
   }
+  UpdateLinkInput: { // input type
+    description?: string | null; // String
+    id: number; // Int!
+    url?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -59,9 +64,11 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createLink: NexusGenRootTypes['Link'] | null; // Link
+    updateLink: NexusGenRootTypes['Link'] | null; // Link
   }
   Query: { // field return type
     feed: Array<NexusGenRootTypes['Link'] | null> | null; // [Link]
+    link: NexusGenRootTypes['Link'] | null; // Link
   }
 }
 
@@ -73,16 +80,26 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createLink: 'Link'
+    updateLink: 'Link'
   }
   Query: { // field return type name
     feed: 'Link'
+    link: 'Link'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
     createLink: { // args
-      data?: NexusGenInputs['CreateLinkInput'] | null; // CreateLinkInput
+      data: NexusGenInputs['CreateLinkInput']; // CreateLinkInput!
+    }
+    updateLink: { // args
+      data: NexusGenInputs['UpdateLinkInput']; // UpdateLinkInput!
+    }
+  }
+  Query: {
+    link: { // args
+      id: number; // Int!
     }
   }
 }
