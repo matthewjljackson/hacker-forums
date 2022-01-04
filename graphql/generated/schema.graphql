@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 input CreateLinkInput {
   description: String!
   url: String!
@@ -10,11 +15,21 @@ input CreateLinkInput {
 type Link {
   description: String!
   id: Int!
+  postedBy: User
+  postedById: Int
   url: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {
   createLink(data: CreateLinkInput!): Link
+  deleteLink(id: Int!): Link
+  login(data: LoginInput!): AuthPayload
+  signUp(data: SignUpInput!): AuthPayload
   updateLink(data: UpdateLinkInput!): Link
 }
 
@@ -23,8 +38,22 @@ type Query {
   link(id: Int!): Link
 }
 
+input SignUpInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
 input UpdateLinkInput {
-  description: String
+  description: String!
   id: Int!
-  url: String
+  url: String!
+}
+
+type User {
+  email: String!
+  id: Int!
+  links: [Link]
+  name: String!
+  password: String!
 }

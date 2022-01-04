@@ -12,11 +12,19 @@ const CreateLinkInput = inputObjectType({
 export const createLink = mutationField('createLink', {
   type: Link,
   args: {data: nonNull(CreateLinkInput) },
-  resolve(_parent, { data }, ctx) {
-    return ctx.prisma.link.create({
+  async resolve(_parent, { data }, ctx) {
+    const { description, url } = data
+    const { userId } = ctx
+    if (!userId) {
+      throw new Error('cannot post without logging in')
+    }
+    const newLink = await ctx.prisma.link.create({
       data: {
-        ...data
+        description,
+        url,
+        postedBy: { connect: { id: userId }}
       }
     })
+    return newLink
   }
 })
