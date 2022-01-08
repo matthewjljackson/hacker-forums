@@ -6,7 +6,7 @@ import {
   inputObjectType,
   enumType,
 } from 'nexus';
-import { Link, Feed } from '../object-types';
+import { Feed } from '../object-types';
 import { Prisma } from '@prisma/client';
 
 const PaginationInput = inputObjectType({
