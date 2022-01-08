@@ -1,5 +1,5 @@
-import { intArg, nonNull, queryField } from 'nexus'
-import { Link } from '../object-types'
+import { intArg, nonNull, queryField } from 'nexus';
+import { Link } from '../object-types';
 
 export const link = queryField('link', {
   type: Link,
@@ -7,8 +7,8 @@ export const link = queryField('link', {
   resolve(_parent, { id }, ctx) {
     return ctx.prisma.link.findUnique({
       where: {
-        id
-      }
-    })
-  }
-})
+        id,
+      },
+    });
+  },
+});
