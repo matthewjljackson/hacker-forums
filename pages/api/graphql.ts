@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { schema } from '../../graphql/nexus-schema';
 import { context } from '../../graphql/context';
-import Cors from 'micro-cors'
+import Cors from 'micro-cors';
 
-const cors = Cors()
+const cors = Cors();
 
 const apolloServer = new ApolloServer({
   schema,
@@ -12,10 +12,7 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-export default cors(async function handler(
-  req,
-  res
-) {
+export default cors(async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     res.end();
     return false;

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // jest.config.js
 const nextJest = require('next/jest');
 

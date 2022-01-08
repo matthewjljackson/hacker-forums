@@ -1,6 +1,6 @@
-import { decodeAuthHeader } from '../utils/auth'
-import { PrismaClient } from '.prisma/client'
-import { NextApiRequest } from 'next'
+import { decodeAuthHeader } from '../utils/auth';
+import { PrismaClient } from '.prisma/client';
+import { NextApiRequest } from 'next';
 
 export interface Context {
   prisma: PrismaClient;
