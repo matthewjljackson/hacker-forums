@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   eslint: {
-    dirs: ['pages', 'graphql', 'utils'],
+    dirs: ['pages', 'graphql', 'utils', 'components'],
   },
 };

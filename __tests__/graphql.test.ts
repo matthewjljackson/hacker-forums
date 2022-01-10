@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 
-import { schema } from '../../graphql/nexus-schema';
-import { context } from '../../graphql/context';
+import { schema } from '../graphql/nexus-schema';
+import { context } from '../graphql/context';
 import { ApolloServer } from 'apollo-server-micro';
-import { seedDatabase } from '../../prisma/seed';
+import { seedDatabase } from '../prisma/seed';
 
 const testServer = new ApolloServer({
   schema,
@@ -30,7 +30,6 @@ describe('Hacker News api tests', () => {
         }
       }`,
     });
-    console.log(result.data);
     expect(result.data).toEqual({
       feed: {
         count: 3,

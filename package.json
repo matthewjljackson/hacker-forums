@@ -49,9 +49,9 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "eslint --fix",
       "npm run prettier:write",
-      "npm run test"
+      "npm run test",
+      "eslint --fix"
     ]
   }
 }
