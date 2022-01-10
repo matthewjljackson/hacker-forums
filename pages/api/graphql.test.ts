@@ -16,5 +16,6 @@ describe('Hacker News api tests', () => {
   it('should check 1 is 1', async () => {
     expect(1).toBe(1);
     expect(1).toBe(1);
+    expect(1).toBe(1);
   });
 });
