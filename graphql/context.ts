@@ -1,6 +1,7 @@
 import { decodeAuthHeader } from '../utils/auth';
 import { PrismaClient } from '.prisma/client';
 import { NextApiRequest } from 'next';
+import { prisma } from '../utils/prisma';
 
 export interface Context {
   prisma: PrismaClient;
@@ -10,9 +11,8 @@ export interface Context {
 export interface ContextArgs {
   req: NextApiRequest;
 }
-const prisma = new PrismaClient();
 
-export const context = ({ req }: any): Context => {
+export const context = ({ req }: ContextArgs): Context => {
   const token =
     req && req.headers.authorization
       ? decodeAuthHeader(req.headers.authorization)

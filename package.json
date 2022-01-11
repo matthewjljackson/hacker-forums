@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.7",
     "@prisma/client": "^3.7.0",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
@@ -50,7 +51,7 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "npm run prettier:write",
-      "npm run test",
+      "npm run test --passWithNoTests",
       "eslint --fix"
     ]
   }
