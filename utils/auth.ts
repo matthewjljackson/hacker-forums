@@ -7,9 +7,13 @@ export interface AuthTokenPayload {
 }
 
 export function decodeAuthHeader(authHeader: string): AuthTokenPayload {
-  const token = authHeader.replace('Bearer', '');
+  console.log(authHeader);
+  const token = authHeader.replace('Bearer ', '');
   if (!token) {
     throw new Error('no token found');
   }
-  return jwt.verify(token, APP_SECRET) as AuthTokenPayload;
+  console.log(token);
+  const x = jwt.verify(token, APP_SECRET) as AuthTokenPayload;
+  console.log('x', x);
+  return x;
 }

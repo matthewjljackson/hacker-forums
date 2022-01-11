@@ -7,12 +7,12 @@ export interface Context {
   userId?: number;
 }
 
-interface ContextArgs {
+export interface ContextArgs {
   req: NextApiRequest;
 }
 const prisma = new PrismaClient();
 
-export const context = ({ req }: ContextArgs): Context => {
+export const context = ({ req }: any): Context => {
   const token =
     req && req.headers.authorization
       ? decodeAuthHeader(req.headers.authorization)
