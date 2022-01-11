@@ -1,9 +1,10 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
 
 import { schema } from '../graphql/nexus-schema';
 import { context } from '../graphql/context';
 import { ApolloServer } from 'apollo-server-micro';
 import { seedDatabase } from '../prisma/seed';
+import { GraphQLResponse } from 'apollo-server-types';
 
 const testServer = new ApolloServer({
   schema,
@@ -47,6 +48,39 @@ describe('Hacker News api tests', () => {
             url: 'https://news.ycombinator.com/',
           },
         ],
+      },
+    });
+  });
+
+  it('should return a single link', async () => {
+    const linkIds = await testServer.executeOperation({
+      query: `query Query {
+        feed {
+          links {
+            id
+          }
+        }
+      }`,
+    });
+    let id: number = 1;
+    if (linkIds.data) {
+      id = linkIds.data.feed.links[0].id;
+    }
+    const result = await testServer.executeOperation({
+      query: `query Link($linkId: Int!) {
+        link(id: $linkId) {
+          description
+          url
+        }
+      }`,
+      variables: {
+        linkId: id,
+      },
+    });
+    expect(result.data).toEqual({
+      link: {
+        description: 'great blog',
+        url: 'www.waitbutwhy.com',
       },
     });
   });
