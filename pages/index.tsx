@@ -7,7 +7,6 @@ import LinkList from '../components/LinkList';
 const Home: NextPage<HomeProps> = ({ feed }) => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <LinkList links={feed.links} />
     </>
   );
