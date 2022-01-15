@@ -49,9 +49,11 @@
     "typescript": "4.5.4"
   },
   "lint-staged": {
+    "**/*.test.ts": [
+      "npm run test"
+    ],
     "**/*.{ts,tsx}": [
       "npm run prettier:write",
-      "npm run test --passWithNoTests",
       "eslint --fix"
     ]
   }
