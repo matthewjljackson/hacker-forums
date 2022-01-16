@@ -32,19 +32,31 @@ describe('Hacker News api tests', () => {
     expect(result.errors).toBeUndefined();
     expect(result.data).toEqual({
       feed: {
-        count: 3,
+        count: 6,
         links: [
           {
-            description: 'great blog',
-            url: 'www.waitbutwhy.com',
+            description: 'My favourite blog',
+            url: 'https://waitbutwhy.com',
           },
           {
-            description: 'great code editor',
+            description: 'Reddit is about to go public',
+            url: 'https://reddit.com/',
+          },
+          {
+            description: 'Great code editor',
             url: 'https://code.visualstudio.com/',
           },
           {
-            description: 'great forum',
+            description: 'The inspiration behind hacker forums',
             url: 'https://news.ycombinator.com/',
+          },
+          {
+            description: 'Tailwind was used to style hacker forums',
+            url: 'https://tailwindcss.com/',
+          },
+          {
+            description: 'Prisma was used as hacker forums orm',
+            url: 'https://www.prisma.io/blog/',
           },
         ],
       },
@@ -79,8 +91,8 @@ describe('Hacker News api tests', () => {
     expect(result.errors).toBeUndefined();
     expect(result.data).toEqual({
       link: {
-        description: 'great blog',
-        url: 'www.waitbutwhy.com',
+        description: 'My favourite blog',
+        url: 'https://waitbutwhy.com',
       },
     });
   });
