@@ -2,11 +2,9 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <>
-      <footer className="sm:text-lg md:text-2xl text-center">
-        hacker forums
-      </footer>
-    </>
+    <footer className="sm:text-md lg:text-xl text-center fixed bottom-0 left-0 right-0">
+      hacker forums
+    </footer>
   );
 };
 
