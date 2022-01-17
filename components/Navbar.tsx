@@ -1,4 +1,3 @@
-// import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
@@ -7,7 +6,7 @@ const Navbar = () => {
       <h1 className="font-bold text-lg lg:text-4xl text-white">
         Hacker Forums
       </h1>
-      <ul className="flex space-x-4 flex-row">
+      <ul className="flex space-x-4 flex-row lg:space-x-8">
         <li>
           <button
             className="lg:text-xl bg-blue-600 text-white border-white border-2
