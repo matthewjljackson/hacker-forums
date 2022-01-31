@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   return (
@@ -8,17 +9,21 @@ const Navbar: React.FC = () => {
       </h1>
       <ul className="flex space-x-4 flex-row lg:space-x-8">
         <li>
-          <button
-            className="lg:text-xl bg-blue-600 text-white border-white border-2
-          hover:border-gray-200 hover:text-gray-200 rounded-full px-2"
-          >
-            register
-          </button>
+          <Link href="/register">
+            <a
+              className="lg:text-xl bg-blue-600 text-white border-white border-2
+          hover:border-gray-200 hover:text-gray-200 rounded-full px-3 py-1"
+            >
+              register
+            </a>
+          </Link>
         </li>
         <li>
-          <button className="lg:text-xl text-white hover:text-gray-200 hover:underline">
-            login
-          </button>
+          <Link href="/login">
+            <a className="lg:text-xl text-white hover:text-gray-200 hover:underline">
+              login
+            </a>
+          </Link>
         </li>
       </ul>
     </section>

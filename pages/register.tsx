@@ -1,34 +1,35 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { loginMutation } from '../graphql/client-queries';
+import { signUpMutation } from '../graphql/client-queries';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
   const router = useRouter();
   const [formState, setFormState] = useState({
     email: '',
+    name: '',
     password: '',
   });
-  const [login, { loading, error }] = useMutation(loginMutation, {
+  const [signUp, { loading, error }] = useMutation(signUpMutation, {
     variables: {
       data: {
         email: formState.email,
         password: formState.password,
+        name: formState.name,
       },
     },
-    onCompleted: ({ login }) => {
-      sessionStorage.setItem('token', login.token);
-      sessionStorage.setItem('userId', login.user.id.toString());
+    onCompleted: ({ signUp }) => {
+      console.log({ signUp });
+      sessionStorage.setItem('token', signUp.token);
+      sessionStorage.setItem('userId', signUp.user.id.toString());
       router.push('/');
     },
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { email, password } = formState;
-    console.log(email, password);
-    await login();
+    await signUp();
     if (loading) return <p>Loading</p>;
     if (error) return <p>An error occurred</p>;
   };
@@ -60,6 +61,27 @@ const Login: NextPage = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 text-sm md:text-lg font-bold mb-2"
+          >
+            Name
+          </label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Name"
+            value={formState.name}
+            onChange={(e) =>
+              setFormState({
+                ...formState,
+                name: e.target.value,
+              })
+            }
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
         <div>
           <label
             htmlFor="password"
@@ -86,7 +108,7 @@ const Login: NextPage = () => {
             type="submit"
             className="md:text-lg bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Sign In
+            Register
           </button>
           <Link href="/">
             <a className="md:text-md inline-block align-baseline font-bold text-blue-600 hover:text-blue-400">
@@ -99,4 +121,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default Register;
