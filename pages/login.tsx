@@ -3,22 +3,37 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { loginMutation } from '../graphql/client-queries';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 
 const Login: NextPage = () => {
-  const [formState, setFormState] = useState<FormState>({
+  const router = useRouter();
+  const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
-  const [login, { data, loading, error }] = useMutation(loginMutation);
+  const [login, { loading, error }] = useMutation(loginMutation, {
+    variables: {
+      data: {
+        email: formState.email,
+        password: formState.password,
+      },
+    },
+    onCompleted: ({ login }) => {
+      console.log('here', login);
+      sessionStorage.setItem('token', login.token);
+      sessionStorage.setItem('userId', login.user.id.toString());
+      console.log(localStorage.getItem('userId'));
+      router.push('/');
+    },
+  });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = formState;
     console.log(email, password);
-    await login({ variables: { data: { email, password } } });
+    await login();
+    if (loading) return <p>Loading</p>;
+    if (error) return <p>An error occurred</p>;
   };
-  if (loading) return 'Loading...';
-  if (error) return 'An error occured';
-  if (data) return `${data.login.token}`;
 
   return (
     <div className="w-full max-w-xs md:max-w-sm mx-auto mt-16 md:mt-32">
@@ -87,8 +102,3 @@ const Login: NextPage = () => {
 };
 
 export default Login;
-
-interface FormState {
-  email: string;
-  password: string;
-}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
     <section className="flex flex-row justify-between py-2 px-4 md:px-10 lg:px-14 bg-blue-600">
       <h1 className="font-bold text-lg lg:text-4xl text-white">
