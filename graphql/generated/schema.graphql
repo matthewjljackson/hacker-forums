@@ -49,6 +49,7 @@ type Mutation {
   login(data: LoginInput!): AuthPayload
   signUp(data: SignUpInput!): AuthPayload
   updateLink(data: UpdateLinkInput!): Link
+  vote(linkId: Int!): Vote
 }
 
 input PaginationInput {
